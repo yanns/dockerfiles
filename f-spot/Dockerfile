@@ -17,7 +17,13 @@
 FROM ubuntu:14.04
 MAINTAINER Yann Simon <yann.simon.fr@gmail.com>
 
-RUN apt-get update && apt-get install -y f-spot gnome-icon-theme
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends light-themes f-spot gnome-icon-theme && \
+    mkdir /root/.themes && \
+    mkdir /root/.icons && \
+    ln -s /usr/share/themes/Ambiance '/root/.themes/Adwaita' && \
+    ln -s /usr/share/icons/ubuntu-mono-dark '/root/.icons/Adwaita' && \
+    rm -rf /var/lib/apt/lists/*
 
 # Autorun chrome
 ENTRYPOINT [ "f-spot" ]
