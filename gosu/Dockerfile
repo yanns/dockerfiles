@@ -1,23 +1,27 @@
 # to buid the container:
 #  docker build -t yanns/gosu .
 
+#  docker push yanns/gosu
+
 # test it:
-# docker run -it yanns/gosu bash
-# Starting with UID : 9001
-# user@846a9433b8d0:/$ id
-# uid=9001(user) gid=9001(user) groups=9001(user)
+#  docker run -it yanns/gosu bash
+#  Starting with UID : 9001
+#  user@846a9433b8d0:/$ id
+#  uid=9001(user) gid=9001(user) groups=9001(user)
 #
-# docker run -it -e LOCAL_USER_ID=`id -u $USER` yanns/gosu bash
-# Starting with UID : 501
-# user@0f623a17b74f:/$ id
-# uid=501(user) gid=1000(user) groups=1000(user)
+#  docker run -it -e LOCAL_USER_ID=`id -u $USER` yanns/gosu bash
+#  Starting with UID : 501
+#  user@0f623a17b74f:/$ id
+#  uid=501(user) gid=1000(user) groups=1000(user)
 
 FROM ubuntu:14.04
 MAINTAINER Yann Simon <yann.simon.fr@gmail.com>
 
 ENV GOSU_VERSION 1.10
 RUN set -x \
-    && apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates wget light-themes \
+    && rm -rf /var/lib/apt/lists/* \
     && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
     && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
     && wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc" \
