@@ -5,14 +5,14 @@
 
 # test it:
 #  docker run -it yanns/gosu bash
-#  Starting with UID : 9001
+#  Starting with UID:GID : 9001:9001
 #  user@846a9433b8d0:/$ id
 #  uid=9001(user) gid=9001(user) groups=9001(user)
 #
-#  docker run -it -e LOCAL_USER_ID=`id -u $USER` yanns/gosu bash
-#  Starting with UID : 501
+#  docker run -it -e LOCAL_USER_ID=`id -u $USER` -e LOCAL_GROUP_ID=`id -u $GROUP` yanns/gosu bash
+#  Starting with UID:GID : 1000:1000
 #  user@0f623a17b74f:/$ id
-#  uid=501(user) gid=1000(user) groups=1000(user)
+#  uid=1000(user) gid=1000(user) groups=1000(user)
 
 FROM ubuntu:14.04
 MAINTAINER Yann Simon <yann.simon.fr@gmail.com>
