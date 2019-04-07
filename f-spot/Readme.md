@@ -6,12 +6,13 @@ As f-spot is not packaged in current Ubuntu anymore, this container allows to co
 
 ```
 docker run -it --rm \
+	--network host \
 	-e DISPLAY=$DISPLAY \
-	-e LOCAL_USER_ID=`id -u $USER` \
-	-e LOCAL_GROUP_ID=`id -u $GROUP` \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
-	-v $HOME:/home/user \
-        -v /media/$USER:/media/user \
+	--user "$(id -u):$(id -g)" \
+	-v /etc/passwd:/etc/passwd:ro \
+	-v $HOME:/home/$USER \
+	-v /media/$USER:/media/user \
 	--name fspot \
 	yanns/f-spot \
 	f-spot
@@ -24,7 +25,7 @@ xhost local:root
 
 ### integration
 
-In `/usr/share/applications/f-desktop.spot`
+In `/usr/share/applications/f-spot.desktop`
 
 ```
 [Desktop Entry]

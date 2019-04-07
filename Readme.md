@@ -12,7 +12,7 @@ sudo gpasswd -a ${USER} docker
 
 To start a container where we can test our setup:
 ```
-docker run -ti -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix ubuntu:14.04 bash
+docker run -ti --network host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix ubuntu:14.04 bash
 $ apt-get update
 $ apt-get install -y <package>
 $ ...

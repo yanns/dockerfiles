@@ -4,12 +4,12 @@
 # to publish the container:
 #  docker push yanns/f-spot
 
-FROM yanns/gosu
+FROM ubuntu:14.04
 MAINTAINER Yann Simon <yann.simon.fr@gmail.com>
 
 RUN set -x \
     && apt-get update \
-    && apt-get install -y --no-install-recommends f-spot gnome-icon-theme \
-    && rm -rf /var/lib/apt/lists/* \
+    && apt-get install -y --no-install-recommends light-themes f-spot gnome-icon-theme \
+    && rm -rf /var/lib/apt/lists/*
 
 CMD [ "f-spot" ]
